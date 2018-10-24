@@ -104,7 +104,6 @@ ul li{
 	font-weight: 500;
 }
 .bottom_box{
-	font-size: 50px;
 	text-align: center;
 	width: 90%;
 	height: 35%;
@@ -173,17 +172,53 @@ ul li{
 }
 .chart1{
 	width: 30%;
-	height: 100%;
-	margin-left: 2%;
-	float: left;
-	/*background-color: rgba(0,0,0,0.1);*/
+	margin-left: 0%;
+	position: relative;
 }
-.chart2 {
-    width: 68%;
-    /*margin-left: 2%;*/
-    height: 100%;
-    float: left;
-     /*background-color: rgba(0,0,0,0.1);*/ 
+.chart1:hover .delete_icon{
+	opacity: 1;
+	/*transform: scale(1);*/
+}
+.delete_icon{
+	width: 40px;
+	height: 40px;
+	position: absolute;
+	background: url(../img/delete.svg) no-repeat;
+	background-size: 100%;
+	right: 10px;
+	top: 0px;
+	opacity: 0;
+	/*transform: scale(0);*/
+	z-index: 9999;
+	cursor: pointer;
+	transition: opacity 0.7s;
+}
+.delete_icon:hover{
+	background: url(../img/delete_1.svg) no-repeat;
+}
+.chart2{
+	width: 36%;
+	margin-left: 2%;
+	position: relative;
+}
+.chart2:hover .delete_icon{
+	opacity: 1;
+	/*transform: scale(1);*/
+}
+.chart3 {
+	width: 30%;
+    margin-left: 2%;
+    position: relative;
+}
+.chart3:hover .delete_icon{
+	opacity: 1;
+	/*transform: scale(1);*/
+}
+.chart{
+	/*margin-left: 2%;*/
+	height: 100%;
+	float: left;
+	/*background-color: rgba(0,0,0,0.4);*/
 }
 
 

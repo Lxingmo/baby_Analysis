@@ -12,7 +12,7 @@ from PIL import Image
 from io import BytesIO
 import requests
 
-define("port", default=5757, help="run on the given port", type=int)
+define("port", default=9895, help="run on the given port", type=int)
 
 
 class GetWarningVoice(tornado.web.RequestHandler):
@@ -60,6 +60,7 @@ class ForwardingRequestHandler (tornado.web.RequestHandler):
             self.write("Internal server error:\n" +str(response.error))
             self.finish()
         else:
+            print(response.body)
             self.set_status(response.code)
             for header in ("Date", "Cache-Control", "Server", "Content-Type", "Location"):
                 v = response.headers.get(header)
@@ -141,6 +142,23 @@ class ForwardingRequestHandler (tornado.web.RequestHandler):
             self.write("Internal server error:\n" + ''.join(traceback.format_exception(*sys.exc_info())))
             self.finish()
 
+
+class GetStreamAddress(tornado.web.RequestHandler):
+    def set_default_headers(self):
+        self.set_header('Access-Control-Allow-Origin', '*')
+        self.set_header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS')
+        self.set_header('Access-Control-Max-Age', 1000)
+        self.set_header('Access-Control-Allow-Headers', '*')
+        self.set_header('Content-type', 'application/json')
+
+    def get(self):
+        result = {
+            "status": 200,
+            "msg": "成功",
+            "data": "rtmp://192.168.10.212:1936/myapp/ai_baby"
+        }
+
+        self.write(json.dumps(result, ensure_ascii=False))
 # def make_app():
 #     return tornado.web.Application([
 #         (r"/login", LoginHandler),
@@ -156,7 +174,8 @@ def make_app():
 
     return tornado.web.Application([
         # (r'/',GetHtml),
-        (r"/.*", ForwardingRequestHandler),
+        # (r"/.*", ForwardingRequestHandler),
+        (r'/getStreamAddress',GetStreamAddress),
         
         # (r'/(.*)', tornado.web.StaticFileHandler, {'path': "static/"}),
     ],**settings)
@@ -166,8 +185,8 @@ if __name__ == "__main__":
     rem_name = ""
     rem_password = ""
 
-    target_host = "192.168.10.62"
-    target_post = "9999"
+    target_host = "192.168.10.212"
+    target_post = "9895"
 
     tornado.options.parse_command_line()
 

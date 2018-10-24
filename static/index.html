@@ -51,13 +51,18 @@
 					</div>
 				</div>
 				<div class="bottom_box">
-					<div class="chart2">
+					<div class="chart chart1">
+						<div class="delete_icon" @click="click_to_clear_pie(1)"></div>
+						<div id="mypie1" style="height:100%; width: 100%;"></div>
+					</div>
+					<div class="chart chart2">
+						<div class="delete_icon" @click="click_to_clear_pie(2)"></div>
 						<div id="mypie2" style="height:100%; width: 100%;"></div>
 					</div>
-					<div class="chart1" id="chart1">
-				    	<div id="mypie1" style="height:100%; width: 100%;"></div>
+					<div class=" chart chart3">
+						<div class="delete_icon" @click="click_to_clear_pie(3)"></div>
+						<div id="mypie3" style="height:100%; width: 100%;"></div>
 					</div>
-					
 				</div>
 			</div>
 			<div class="min_box right_box">
@@ -77,7 +82,7 @@
 									<div class="color_box" :style="{'background-color':item.colorLabel}"></div>
 									<ul>
 										<li>时间：<span>{{ item.time }}</span></li>
-										<li>情绪：<span>{{ item.mood }}</span></li>
+										<li>情绪：<span>{{ item.emotion }}</span></li>
 										<li>状态：<span>{{ item.status }}</span></li>
 									</ul>
 								</div>
@@ -88,6 +93,9 @@
 			</div>
 		</div>
 		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+		<script src="js/sockjs.min.js"></script>
+		<script src="js/stomp.min.js"></script>
+		<script src="js/axios.min.js"></script>
 		<script type="text/javascript" src="grindPlayer/grindPlayer.js"></script>
 		<script type="text/javascript" src="js/echarts.js" ></script>
 		<script type="text/javascript" src="js/index.js" ></script>
